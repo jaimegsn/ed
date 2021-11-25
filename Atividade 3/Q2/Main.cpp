@@ -33,7 +33,8 @@ int main(int argc, char const *argv[]){
         for (int j = 0; j < (*tcons); j++){
             if(vbusc[i]==vcons[j]) (*aux)++;
         }
-        cout << *aux <<" ";
+        if(i==*tbusc-1)cout << *aux <<"\n";
+        else cout << *aux <<" ";
         *aux = 0;
     }
     
