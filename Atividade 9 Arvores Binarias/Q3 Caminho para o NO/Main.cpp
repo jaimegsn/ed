@@ -51,31 +51,66 @@ struct BTree
         delete node;
     }
 
+    string final = "";
+
+    void bshow()
+    {
+        __bshow(this->root);
+    }
+
+    void __bshow(Node *node, string heranca = "")
+    {
+        if (node != nullptr && (node->left != nullptr || node->right != nullptr))
+            __bshow(node->left, heranca + "l");
+        for (int i = 0; i < (int)heranca.size() - 1; i++)
+            cout << (heranca[i] != heranca[i + 1] ? "_" : "");
+        if (heranca != "")
+        {
+            cout << (heranca.back() == 'l' ? "L" : "R");
+        }
+        if (node == nullptr)
+        {
+            cout << "#" << endl;
+            return;
+        }
+        cout << node->value;
+        final += node->value;
+        if (node != nullptr && (node->left != nullptr || node->right != nullptr))
+            __bshow(node->right, heranca + "r");
+    }
+
     ~BTree()
     {
         __destroy(this->root);
     }
 
-    /****************************/
-
     string find_path(Node *node, int value)
     {
-        sting final = "";
-        if (node->value == value)
-            final += 'x';
-
-        else
+        for (int i = 0; i < final.size(); i++)
         {
-            final += 'r';
-            if (node->right == value || node->left == value)
-                final += 'x';
+            int token = 0;
+            string result = "";
+            if (final[0] == value)
+                return r;
             else
             {
-                
+                if (i == 0)
+                    result += "r";
+
+                else if (final[i] == '_')
+                {
+                    token++;
+                }
+                else if (final[i] == value)
+                    result += 'x';
+
+                else
+                {
+                    result += final[i];
+                }
             }
         }
     }
-    /****************************/
 };
 
 int main()
@@ -87,4 +122,5 @@ int main()
     cin >> value;
     string path = bt.find_path(bt.root, value);
     cout << path << "\n";
+    bt.bshow();
 }
